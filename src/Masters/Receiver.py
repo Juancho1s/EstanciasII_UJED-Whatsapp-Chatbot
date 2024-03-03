@@ -1,13 +1,14 @@
 from flask import Blueprint
-from Slaves.Services.sayHi import Greeting
-from Slaves.Services.Verifications import TokensVerification
+import Slaves.Services.sayHi as sayHi
+import Slaves.Services.Verifications as Verifications
+import Slaves.Services.Messages as Messages
 
 
 
 blueprint = Blueprint('api', __name__)
 
-blueprint.route('/home', methods=["GET"])(Greeting.sayHello)
+blueprint.route('/home', methods=["GET"])(sayHi.Greeting.sayHello)
 
-blueprint.route('/webhook', method=["GET"])(TokensVerification.verifyUserToken)
+blueprint.route('/webhook', method=["GET"])(Verifications.TokensVerification.verifyUserToken)
 
-blueprint.route('/webhook', method=["POST"])
+blueprint.route('/webhook', method=["POST"])(Messages.Chatting.receiveMessage)
