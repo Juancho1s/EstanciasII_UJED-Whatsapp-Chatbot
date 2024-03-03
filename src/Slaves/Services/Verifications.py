@@ -3,7 +3,7 @@ from .. import Config
 
 
 class TokensVerification:
-    def verifyUserToken(self):
+    def verifyUserToken():
         try:
             token = req.args.get("hub.verify_token")
             challenge = req.args.get("hub.challenge")

@@ -9,6 +9,6 @@ blueprint = Blueprint('api', __name__)
 
 blueprint.route('/home', methods=["GET"])(sayHi.Greeting.sayHello)
 
-blueprint.route('/webhook', method=["GET"])(Verifications.TokensVerification.verifyUserToken)
+blueprint.route('/webhook', methods=["GET"])(Verifications.TokensVerification.verifyUserToken)
 
-blueprint.route('/webhook', method=["POST"])(Messages.Chatting.receiveMessage)
+blueprint.route('/webhook', methods=["POST"])(Messages.Chatting.receiveMessage)

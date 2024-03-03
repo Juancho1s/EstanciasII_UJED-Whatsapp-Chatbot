@@ -1,11 +1,12 @@
+from flask import request as req
 import requests as reqs
-import sayHi
-import Config
 import json
+from . import sayHi
+from .. import Config
 
 
 class Chatting:
-    def receiveMessage(self):
+    def receiveMessage():
         try:
             body = req.get_json()
             value = body["entry"][0]["changes"][0]["value"]
@@ -13,16 +14,16 @@ class Chatting:
             name = value["contacts"][0]["profile"]["name"]
             number = message["from"]
             messageId = message["id"]
-            text = self.obtainWhatsappMessage(message)
+            text = Chatting.obtainWhatsappMessage(message)
 
-            self.chatbotManagement(text, number, messageId, name)
+            Chatting.chatbotManagement(text, number, messageId, name)
 
             return "the message was sent"
 
         except Exception as e:
-            return {"statusCode": 403, "res": str(e) + "  Error on receiving message"}
+            return {"statusCode": 403, "res": str(e) + " Error on receiving message"}
 
-    def obtainWhatsappMessage(self, message):
+    def obtainWhatsappMessage(message):
         if "type" not in message:
             text = (
                 "The message was not recognized. Please send a valid WhatsApp message."
@@ -32,7 +33,7 @@ class Chatting:
             text = message["text"]["body"]
 
 
-    def sendWhatsappMessage(self, data):
+    def sendWhatsappMessage(data):
         try:
             whatsappCredentials = {
                 "whatsappToken": Config.whatsappToken,  # Get this from your settings.py file
@@ -61,7 +62,7 @@ class Chatting:
             return {"statusCode": 403, "res": str(e) + "  Error on sending message"}
 
 
-    def textMessage(self, number, text):
+    def textMessage(number, text):
         data = json.dumps(
             {
                 "messaging_product": "whatsapp",
@@ -78,5 +79,5 @@ class Chatting:
         text = str(text).lower()
         collection = []
 
-        data = textMessage(number, sayHi.Greeting.sayHello())
-        sendWhatsappMessage(data)
+        data = Chatting.textMessage(number, sayHi.Greeting.sayHello())
+        Chatting.sendWhatsappMessage(data)
