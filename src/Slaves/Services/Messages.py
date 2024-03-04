@@ -21,7 +21,7 @@ class Chatting:
             return "the message was sent"
 
         except Exception as e:
-            return {"statusCode": 403, "res": str(e) + " Error on receiving message"}
+            return {"statusCode": 403, "res": str(e) + ". Error on receiving message"}
 
     def obtainWhatsappMessage(message):
         if "type" not in message:
