@@ -14,4 +14,4 @@ class TokensVerification:
                 return {"statusCode": 403, "res": "Invalid token."}
 
         except Exception as e:
-            return {"statusCode": 401, "res": str(e) + " Invalid or expired token."}
+            return {"statusCode": 401, "res": str(e) + " Invalid or unexpired token."}
