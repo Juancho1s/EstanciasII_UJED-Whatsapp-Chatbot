@@ -1,7 +1,5 @@
 from flask import Blueprint
-import Slaves.Services.sayHi as sayHi
-import Slaves.Services.Verifications as Verifications
-import Slaves.Services.Messages as Messages
+from Slaves.Chat.Services import sayHi, Verifications, Messages
 
 
 

@@ -1,5 +1,5 @@
 from flask import request as req
-from .. import Config
+import config
 
 
 class TokensVerification:
@@ -8,7 +8,7 @@ class TokensVerification:
             token = req.args.get("hub.verify_token")
             challenge = req.args.get("hub.challenge")
 
-            if token == Config.whatsappToken and challenge != None:
+            if token == config.whatsappToken and challenge != None:
                 return {"statusCode": 200, "res": challenge}
             else:
                 return {"statusCode": 403, "res": "Invalid token."}
