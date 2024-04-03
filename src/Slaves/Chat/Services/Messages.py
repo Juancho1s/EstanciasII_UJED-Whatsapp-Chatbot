@@ -23,6 +23,7 @@ class Chatting:
             name = value["contacts"][0]["profile"]["name"]
             number = message["from"]
             messageId = message["id"]
+
             text = Chatting.obtainWhatsappMessage(message)
 
             return CF.ConversationFlow.chatbotManagement(text, number, messageId, name)
@@ -30,6 +31,19 @@ class Chatting:
         except Exception as e:
             print(e)
             return {"statusCode": 403, "res": str(e) + ". Error on receiving message"}
+
+    """
+    The function `obtainWhatsappMessage` extracts and returns the text content from different types
+    of WhatsApp messages.
+    
+    :param message: The `obtainWhatsappMessage` function takes a `message` parameter as input. The
+    function checks the type of the message and extracts the relevant text content based on the
+    message type
+    :return: The function `obtainWhatsappMessage` returns a text message based on the type of
+    WhatsApp message provided as input. If the message type is "text", it returns the body of the
+    text message. If the message type is "button", it returns the text of the button. If the message
+    type is "interactive" and the interactive type is "list_reply", it returns the title of the
+    """
 
     def obtainWhatsappMessage(message):
         if "type" not in message:
@@ -41,20 +55,25 @@ class Chatting:
         typeMessage = message["type"]
         if typeMessage == "text":
             text = message["text"]["body"]
+
         elif typeMessage == "button":
             text = message["button"]["text"]
+
         elif (
             typeMessage == "interactve"
             and message["interactive"]["type"] == "list_reply"
         ):
             text = message["interactive"]["list_reply"]["title"]
+
         elif (
             typeMessage == "interactve"
             and message["interactive"]["type"] == "button_reply"
         ):
             text = message["interactive"]["button_reply"]["title"]
+
         else:
             text = f'This type of message ("{typeMessage}") is not supported yet.'
+
         return text
 
     """
@@ -72,7 +91,7 @@ class Chatting:
     def sendWhatsappMessage(data):
         try:
             whatsappCredentials = {
-                "whatsappToken": config.whatsappToken,  # Get this from your settings.py file
+                "whatsappToken": config.whatsappToken,
                 "whatsappURL": config.whatsappURL,
             }
 

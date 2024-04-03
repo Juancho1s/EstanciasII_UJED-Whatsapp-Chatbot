@@ -113,30 +113,25 @@ class SendingFormats:
         }
         return data
 
-    """
-    The function `documentMessage` creates a JSON message for sending a document to a specific
-    recipient via messaging.
-    
-    :param number: The `number` parameter in the `documentMessage` function is the phone number of
-    the recipient to whom you want to send the document message
-    :param url: The `url` parameter in the `documentMessage` function is the URL of the
-    document/file that you want to send in the message
-    :param caption: The `caption` parameter in the `documentMessage` function is used to provide a
-    description or title for the document being sent. It is a text that accompanies the document and
-    provides additional context or information about the file
-    :param filename: The `filename` parameter in the `documentMessage` function is used to specify
-    the name of the file that will be sent in the message. It is a string value that represents the
-    name of the file being shared
-    :return: a JSON string containing information about a document message to be sent.
-    """
-
-    def documentMessage(self, number, file, caption, filename):
+    def documentMessage(self, number, url, caption, filename, footer):
         data = {
-            "messaging_product": "document",
+            "messaging_product": "whatsapp",
             "recipient_type": "individual",
             "to": number,
-            "type": "file",
-            "file": {"":"", "caption": caption, "filename": filename},
+            "type": "interactive",
+            "interactive": {
+                "type": "cta_url",
+                "header": {"type": "text", "text": filename},
+                "body": {"text": caption},
+                "footer": {"text": footer},
+                "action": {
+                    "name": "cta_url",
+                    "parameters": {
+                        "display_text": "Revisar documento",
+                        "url": url,
+                    },
+                },
+            },
         }
         return data
 
