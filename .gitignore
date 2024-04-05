@@ -14,8 +14,8 @@ build/
 instance/
 
 # IDE files
-idea/
-vscode/
+.idea/
+.vscode/
 
 # Compiled Python files
 *.pyc
