@@ -3,7 +3,7 @@ __pycache__/
 *.pyc
 
 # Environment folder
-.venv/
+.env/
 
 # Distribution / packaging
 *.egg-info/
