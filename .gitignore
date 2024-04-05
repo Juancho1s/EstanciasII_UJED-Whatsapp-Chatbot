@@ -3,7 +3,7 @@ __pycache__/
 *.pyc
 
 # Environment folder
-.env/
+venv/
 
 # Distribution / packaging
 *.egg-info/
@@ -14,8 +14,8 @@ build/
 instance/
 
 # IDE files
-.idea/
-.vscode/
+idea/
+vscode/
 
 # Compiled Python files
 *.pyc
