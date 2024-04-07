@@ -4,7 +4,7 @@ whatsappURL = "https://graph.facebook.com/v18.0/271737759347991/messages"
 
 dbCredentials = {
     "user": 'root',
-    "passwd": '123456789',
+    "password": '123456789',
     "host": 'localhost',
     "database": 'procedures_ujed_chatbot',
     "port": 3306
