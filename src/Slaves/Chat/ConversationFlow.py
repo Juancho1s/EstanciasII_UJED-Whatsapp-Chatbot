@@ -9,7 +9,7 @@ class ConversationFlow:
         text = str(text).lower()
         collection = []
 
-        if ("hola" or "ayuda" or "reiniciar chatbot" or "si" or "sí") in text:
+        if ("hola" or "ayuda" or "reiniciar chatbot") in text:
 
             body = "¡Hola! Un gusto saludarte. ¿Te habla el chatbot interactivo de la UJED, en qué podemos ayudarte el día de hoy?"
             footer = "Atte: control escolar"
@@ -41,9 +41,9 @@ class ConversationFlow:
             return  collection
 
         else:
-            time.sleep(3)
+            time.sleep(5)
 
-            body = "Lo siento mucho pero no pude enteneder el mensaje. ¿Quieres ayuda con alguno de los siguientes conseptos?"
+            body = "Lo siento mucho pero no pude enteneder el mensaje. ¿Quieres ayuda con alguno de los siguientes conceptos?"
             footer = "Atte: control escolar"
             options = ["Inscripciones", "Pagos", "Documento de reglas"]
 

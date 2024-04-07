@@ -1,7 +1,11 @@
 whatsappToken = "EAAEyRrnxuOcBOxx4ApdRMJT5YtgoxmqQNtEw4ZCI9gzJ8ZCXYCsfAowBffwsQ2bnmrGhTvk1sKaUTEB7wzmLWE2J24KJaw40k9iLOfvZCZC6bV3kufMz7dHBS75nHrD6AQZC1S9mAjsXYDfxtqP8PplJrceHQS2LM2wKRm00zSTUOTR1fsFMaxRZCOLhZCzrRng"
-# EAAEyRrnxuOcBO1CdYNZB0tmTfCcQY1onJjjIptBtIiDZAgFWRThUqlX23CaNYEcolk5VCKZB5HKqGb1nXUA6matwyYhzd4eOrF7tcsGnew8OdDi7HCLNlZBsA8ub335fLEVFwYrGn2pOssvebnL0uv9ZCeJT8n1K8cftxUNftfeGMmu7k5i80AqfCi8SwZAoolLGV0ZBmwmaOMdmyW32EY7A0jWOh4ZD
-
 
 whatsappURL = "https://graph.facebook.com/v18.0/271737759347991/messages"
 
-MyToken = "MyToken"
+dbCredentials = {
+    "user": 'root',
+    "passwd": '123456789',
+    "host": 'localhost',
+    "database": 'procedures_ujed_chatbot',
+    "port": 3306
+    }

@@ -1,0 +1,20 @@
+Oferta educativa [section]
+|-------Por nivel educativo [section]
+		|-------Media superior [section]
+				|-------Nocturna(General) [procedure]
+				|
+				|-------Diurna(General) [procedure]
+				|
+				|-------Nocturna(Semiesc) [procedure]
+				|
+				|-------Diurna(Música) [procedure]
+				|
+				|-------Ciencias/Tecnologías [procedure]
+				|
+				|-------Ciencias/Humanidades [procedure]
+		|
+		|-------Lic./Ing. [section]
+				|------- ...
+		|
+		|-------Posgrados [section]
+				|------- ...
