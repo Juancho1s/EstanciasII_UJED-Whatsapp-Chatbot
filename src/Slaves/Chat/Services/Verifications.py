@@ -5,8 +5,8 @@ import config
 class TokensVerification:
     def verifyUserToken():
         try:
-            token = req.args.get("hub.verify_token")
-            challenge = req.args.get("hub.challenge")
+            token = req.args.get('hub.verify_token')
+            challenge = req.args.get('hub.challenge')
 
             if token == config.whatsappToken and challenge != None:
                 return {"statusCode": 200, "res": challenge}

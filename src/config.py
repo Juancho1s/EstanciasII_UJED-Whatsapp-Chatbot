@@ -2,6 +2,8 @@ whatsappToken = "EAAEyRrnxuOcBOxx4ApdRMJT5YtgoxmqQNtEw4ZCI9gzJ8ZCXYCsfAowBffwsQ2
 
 whatsappURL = "https://graph.facebook.com/v18.0/271737759347991/messages"
 
+myToken = "token"
+
 dbCredentials = {
     "user": 'root',
     "password": '123456789',

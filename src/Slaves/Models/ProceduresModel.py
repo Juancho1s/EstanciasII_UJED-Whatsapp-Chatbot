@@ -27,8 +27,10 @@ class ProceduresModel:
     def getConnectedProceduresBySection(self, sectionId):
        # Set the query statement to retrive the data from the database
         query = (
-            "SELECT name, btn_name, content, url FROM procedures AS pr "
-            "WHERE id == (%s);"
+            """
+            SELECT btn_name FROM procedures AS pr 
+            WHERE pr.section_table_id = (%s);
+            """
         )
         # Create a cursor object and execute the SQL command
         cursor = self.connection.cursor(buffered=True)
@@ -56,12 +58,61 @@ class ProceduresModel:
             
             else:
                 # No data found matching the query
-                print("No sections found.")
-                
-                return None
+                print("No procedures found.")
             
         except Exception as e:
             # An error occurred while executing the query
             print(f"Error getting connected procedures by section ID: {e}")
         
+        cursor.close()
+        return None
+    
+    
+    def getDataByName(self, name):
+        """
+        The function `getDataByName` retrieves data from a database table based on a given name.
+        
+        :param name: The code you provided is a method that retrieves data from a database table called
+        "procedures" based on the input name. It constructs and executes an SQL query to fetch the name,
+        content, and URL of procedures that match the given name
+        :return: The `getDataByName` method returns a dictionary containing the name, content, and URL
+        of procedures that match the input name. If no procedures are found with the given name, it
+        prints a message stating "No procedure found with that name." If an error occurs during the
+        execution of the method, it prints an error message. In all cases, the method closes the
+        database cursor before returning either the results
+        """
+        # Define the SQL command to be executed
+        query = """
+            SELECT name, content, url FROM procedures
+            WHERE name = (%s);
+        """
+        # Create a new cursor object using the connection
+        cursor = self.connection.cursor(buffered=True)
+        
+        try:
+            # Execute the query
+            cursor.execute(query, name)
+            results = {
+                "name": [],
+                "content": [],
+                "url": []
+            }
+            # Fetch all the returned rows
+            rows = cursor.fetchall()
+            if len(rows) > 0:
+                for row in rows:
+                    results["name"].append(row[0])
+                    results["content"].append(row[1])
+                    results["url"].append(row[2])
+                # Close the database cursor and return the results
+                cursor.close()
+                return  results
+            
+            else:
+                print("No procedure found with that name.")
+            
+        except Exception as e:
+            print(f"An error occurred when trying to retrieve data by name: {e}")
+        
+        cursor.close()
         return None

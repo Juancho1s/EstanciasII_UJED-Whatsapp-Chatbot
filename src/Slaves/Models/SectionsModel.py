@@ -30,8 +30,10 @@ class SectionsModel:
     """
     def getSectionsByName(self, sectionName: str):
         query = (
-            "SELECT id, name FROM sections AS sc "
-            "WHERE sc.name == (%s);"
+            """
+            SELECT id, name FROM sections AS sc 
+            WHERE sc.name == (%s);
+            """
         )
         
         cursor = self.connection.cursor(buffered=True)
@@ -69,10 +71,13 @@ class SectionsModel:
     """
     def getAllSectionsConnected(self, initialSection: str):
         query = (
-            "SELECT id, name FROM sections AS sc "
-            "WHERE pr.section_id == ( "
-            "   SELECT id FROM sections AS scFltr "
-            "   WHERE prFltr.name == %s); "
+            """
+            SELECT id, name FROM sections AS sc 
+            WHERE sc.section_id = (
+                SELECT id FROM sections AS scFltr
+                WHERE scFltr.name = (%s)
+            );
+            """
         )
         
         cursor = self.connection.cursor(buffered=True)
