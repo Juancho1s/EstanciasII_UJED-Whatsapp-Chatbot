@@ -8,8 +8,8 @@ class TokensVerification:
             token = req.args.get('hub.verify_token')
             challenge = req.args.get('hub.challenge')
 
-            if token == config.whatsappToken and challenge != None:
-                return {"statusCode": 200, "res": challenge}
+            if token == config.myToken and challenge != None:
+                return challenge
             else:
                 return {"statusCode": 403, "res": "Invalid token."}
 
