@@ -1,5 +1,5 @@
 import mysql.connector
-from ... import config
+import config
 
 
 class SectionsModel:
@@ -9,26 +9,12 @@ class SectionsModel:
     """
     def __init__(self):
         connection = config.dbCredentials
-        self.connection = mysql.connector.connect(host=connection["host"], user=connection["user"], password=connection["password"], database=config["database"])
+        self.connection = mysql.connector.connect(host=connection["host"], user=connection["user"], password=connection["password"], database=connection["database"])
         
         
         
-    """
-    This function retrieves sections by name from a database and returns their IDs and names in a
-    dictionary.
-    
-    :param sectionName: The `getSectionsByName` method you provided is a Python function that
-    queries a database to retrieve sections based on the provided `sectionName`. The function
-    executes a SQL query to select the `id` and `name` of sections where the name matches the input
-    `sectionName`
-    :type sectionName: str
-    :return: The function `getSectionsByName` returns a dictionary containing the "id" and "name" of
-    sections that match the provided section name. If there are matching entries found in the
-    database, the function returns the dictionary with the corresponding data. If no matching
-    entries are found, it prints an error message and returns `None`. If an error occurs during the
-    execution of the SQL query, it prints an
-    """
-    def getSectionsByName(self, sectionName: str):
+   
+    def getSectionsByName(self, sectionName: tuple):
         query = (
             """
             SELECT id, name FROM sections AS sc 
@@ -56,20 +42,8 @@ class SectionsModel:
             
             
     
-    """
-    This function retrieves all sections connected to a specified initial section from a database.
-    
-    :param initialSection: It is a method for retrieving all sections
-    connected to an initial section from a database. The `initialSection` parameter is the name of
-    the section you want to find connections for
-    :type initialSection: str
-    :return: a dictionary containing the "id" and "name" of sections connected to the initialSection
-    provided as input. If sections are found based on the query, the function returns the dictionary
-    with the section details. If no sections are found, it prints "No sections found." and returns
-    None. If an error occurs during the execution of the query, it prints an error message and
-    returns
-    """
-    def getAllSectionsConnected(self, initialSection: str):
+    def getAllSectionsConnected(self, initialSection: tuple):
+        
         query = (
             """
             SELECT id, name FROM sections AS sc 

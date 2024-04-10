@@ -1,5 +1,5 @@
 import mysql.connector
-from ... import config
+import config
 
 
 class ProceduresModel:
@@ -7,9 +7,12 @@ class ProceduresModel:
     The function initializes a connection to a MySQL database using credentials from a configuration
     file.
     """
+    
+    connection = None
+    
     def __init__(self):
             connection = config.dbCredentials
-            self.connection = mysql.connector.connect(host=connection["host"], user=connection["user"], password=connection["password"], database=config["database"])
+            self.connection = mysql.connector.connect(host=connection["host"], user=connection["user"], password=connection["password"], database=connection["database"])
             
     
     """
@@ -24,7 +27,7 @@ class ProceduresModel:
     dictionary with the corresponding data. If no matching rows are found, it prints "No sections
     found." and returns `None`. If an
     """
-    def getConnectedProceduresBySection(self, sectionId):
+    def getConnectedProceduresBySection(self, sectionId: tuple):
        # Set the query statement to retrive the data from the database
         query = (
             """
@@ -68,7 +71,7 @@ class ProceduresModel:
         return None
     
     
-    def getDataByName(self, name):
+    def getDataByName(self, btnName: tuple):
         """
         The function `getDataByName` retrieves data from a database table based on a given name.
         
@@ -82,16 +85,16 @@ class ProceduresModel:
         database cursor before returning either the results
         """
         # Define the SQL command to be executed
-        query = """
-            SELECT name, content, url FROM procedures
-            WHERE name = (%s);
-        """
+        query = (
+            "SELECT name, content, url FROM procedures "
+            "WHERE btn_name = %s;"
+        )
         # Create a new cursor object using the connection
-        cursor = self.connection.cursor(buffered=True)
+        cursor = self.connection.cursor()
         
         try:
             # Execute the query
-            cursor.execute(query, name)
+            cursor.execute(query, btnName)
             results = {
                 "name": [],
                 "content": [],

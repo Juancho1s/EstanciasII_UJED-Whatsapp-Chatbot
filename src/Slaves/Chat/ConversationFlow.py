@@ -1,4 +1,5 @@
 from Slaves.Chat.Services import sayHi, Formats, Messages
+from Slaves.Models import ProceduresModel, SectionsModel
 import time
 
 
@@ -6,7 +7,12 @@ class ConversationFlow:
 
     def chatbotManagement(text, number, messageId, name):
         sendingFormats = Formats.SendingFormats()
+        proceduresModel = ProceduresModel.ProceduresModel()
+        sectionsModel = SectionsModel.SectionsModel()
+
+
         text = str(text).lower()
+        print(f"'{text}'")
         collection = []
 
         if ("hola" or "ayuda" or "reiniciar chatbot") in text:
@@ -39,9 +45,25 @@ class ConversationFlow:
             )
             collection.append(Messages.Chatting.sendWhatsappMessage(document))
             return  collection
+        
+        elif "nocturna(general)" in text:
+            data = proceduresModel.getDataByName(["Nocturna(General)"])
+            print(data)
+            
+            document = sendingFormats.documentMessage(
+                number,
+                data["url"][0],
+                data["content"][0],
+                data["name"][0],
+                "Atte: control escolar"
+            )
+            
+            return Messages.Chatting.sendWhatsappMessage(document)
+        
+        elif 
 
         else:
-            time.sleep(5)
+            time.sleep(3)
 
             body = "Lo siento mucho pero no pude enteneder el mensaje. ¿Quieres ayuda con alguno de los siguientes conceptos?"
             footer = "Atte: control escolar"
