@@ -1,10 +1,3 @@
-from flask import request as req
-import requests as reqs
-import json
-from . import sayHi
-import config
-
-
 class SendingFormats:
 
     def interactiveButtonMessage(self, number, options, body, footer, sedd):

@@ -1,4 +1,4 @@
-from Slaves.Chat.Services import sayHi, Formats, Messages
+from Slaves.Chat.Services import Formats, Messages
 from Slaves.Models import ProceduresModel, SectionsModel
 import time
 
@@ -61,12 +61,18 @@ class ConversationFlow:
             return Messages.Chatting.sendWhatsappMessage(document)
         
         elif "diurna(general)" in text:
-            proceduresData = proceduresModel.getDataByName(["Diurna(General)"])
-            print(proceduresData)
+            data = proceduresModel.getDataByName(["Diurna(General)"])
+            print(data)
             
-            listMessage = sendingFormats.interactiveListMessage(number, proceduresData, "Puedes consultar las secciones referentes en la siguiente lista", "Atte: control escolar")
+            document = sendingFormats.documentMessage(
+                number,
+                data["url"][0],
+                data["content"][0],
+                data["name"][0],
+                "Atte: control escolar"
+            )
             
-            return Messages.Chatting.sendWhatsappMessage(listMessage)
+            return Messages.Chatting.sendWhatsappMessage(document)
 
         
         elif "media superior" in text:

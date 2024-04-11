@@ -1,9 +1,9 @@
 from flask import request as req
 import requests as reqs
-import json
 from .. import ConversationFlow as CF
-from . import sayHi
 import config
+from Slaves.Models import ProceduresModel, SectionsModel
+import Formats
 
 
 class Chatting:
@@ -84,3 +84,41 @@ class Chatting:
 
         except Exception as e:
             return {"statusCode": 403, "res": str(e) + "  Error on sending message"}
+
+
+
+class Messagestructure:
+    def __init__(self):
+        self.sectionsModel = SectionsModel.SectionsModel()
+        self.proceduresModel = ProceduresModel.ProceduresModel()
+        self.sendingFormats = Formats.SendingFormats()
+    
+    
+    def sectionListStrucutre(self, nameFilter: str, phoneNumber: int, messageBody: str, messageFooter: str):
+        sectionsData = self.sectionsModel.getAllSectionsConnected([nameFilter])
+        if sectionsData == None:
+            return None
+        print(sectionsData)
+        
+        return self.sendingFormats.interactiveListMessage(phoneNumber, sectionsData, messageBody, messageFooter)
+    
+    #Missing method: In order to get and specific section by name.
+    #def 
+    
+    
+    def procedureListStrucutre(self, idFilter: int, phoneNumber: int, messageBody: str, messageFooter: str):
+        proceduresData = self.proceduresModel.getConnectedProceduresBySection([idFilter])
+        if proceduresData == None:
+            return None
+        print(proceduresData)
+        
+        return self.sendingFormats.interactiveListMessage(phoneNumber, proceduresData, messageBody, messageFooter)
+    
+    
+    def procedureDetailsStructure(self, nameFilter: int, phoneNumber: int, messageBody: str, messageFooter: str):
+        procedureData = self.proceduresModel.getDataByName([nameFilter])
+        if procedureData == None:
+            return None
+        print(procedureData)
+        
+        return self.sendingFormats.documentMessage(phoneNumber, procedureData["url"], messageBody, procedureData["name"], messageFooter)
