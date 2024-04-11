@@ -71,7 +71,7 @@ class ProceduresModel:
         return None
     
     
-    def getDataByName(self, btnName: tuple):
+    def getDataByName(self, btnName: list):
         """
         The function `getDataByName` retrieves data from a database table based on a given name.
         

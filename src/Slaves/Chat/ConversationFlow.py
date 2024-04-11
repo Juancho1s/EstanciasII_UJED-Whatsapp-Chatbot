@@ -60,7 +60,39 @@ class ConversationFlow:
             
             return Messages.Chatting.sendWhatsappMessage(document)
         
-        elif 
+        elif "diurna(general)" in text:
+            proceduresData = proceduresModel.getDataByName(["Diurna(General)"])
+            print(proceduresData)
+            
+            listMessage = sendingFormats.interactiveListMessage(number, proceduresData, "Puedes consultar las secciones referentes en la siguiente lista", "Atte: control escolar")
+            
+            return Messages.Chatting.sendWhatsappMessage(listMessage)
+
+        
+        elif "media superior" in text:
+            proceduresData = proceduresModel.getDataByName(["Media superior"])
+            print(proceduresData)
+            
+            listMessage = sendingFormats.interactiveListMessage(number, proceduresData, "Puedes consultar las secciones referentes en la siguiente lista", "Atte: control escolar")
+            
+            return Messages.Chatting.sendWhatsappMessage(listMessage)
+
+        
+        elif "por nivel educativo" in text:
+            sectionsData = sectionsModel.getAllSectionsConnected(["por nivel educativo"])
+            print(sectionsData)
+            
+            listMessage = sendingFormats.interactiveListMessage(number, sectionsData, "Puedes consultar las secciones referentes en la siguiente lista", "Atte: control escolar")
+
+            return Messages.Chatting.sendWhatsappMessage(listMessage)
+        
+        elif "oferta educativa" in text:
+            sectionsData = sectionsModel.getAllSectionsConnected(["Oferta educativa"])
+            print(sectionsData)
+            
+            listMessage = sendingFormats.interactiveListMessage(number, sectionsData, "Puedes consultar las secciones referentes en la siguiente lista", "Atte: control escolar")
+            
+            return Messages.Chatting.sendWhatsappMessage(listMessage)
 
         else:
             time.sleep(3)

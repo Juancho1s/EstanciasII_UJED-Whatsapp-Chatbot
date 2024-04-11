@@ -7,13 +7,6 @@ import config
 
 
 class Chatting:
-    """
-    The `receiveMessage` function processes incoming messages, extracts relevant information, and
-    interacts with a chatbot before returning a success message or error.
-    :return: The function `receiveMessage` is returning either "the message was sent" if the message
-    was successfully processed, or a dictionary with a status code of 403 and an error message if an
-    exception occurred during message processing.
-    """
 
     def receiveMessage():
         try:
@@ -31,19 +24,7 @@ class Chatting:
         except Exception as e:
             print(e)
             return {"statusCode": 403, "res": str(e) + ". Error on receiving message"}
-
-    """
-    The function `obtainWhatsappMessage` extracts and returns the text content from different types
-    of WhatsApp messages.
-    
-    :param message: The `obtainWhatsappMessage` function takes a `message` parameter as input. The
-    function checks the type of the message and extracts the relevant text content based on the
-    message type
-    :return: The function `obtainWhatsappMessage` returns a text message based on the type of
-    WhatsApp message provided as input. If the message type is "text", it returns the body of the
-    text message. If the message type is "button", it returns the text of the button. If the message
-    type is "interactive" and the interactive type is "list_reply", it returns the title of the
-    """
+        
 
     def obtainWhatsappMessage(message):
         if "type" not in message:
@@ -75,18 +56,7 @@ class Chatting:
             text = f'This type of message ("{typeMessage}") is not supported yet.'
 
         return text
-
-    """
-    The function `sendWhatsappMessage` sends a WhatsApp message using the provided data and returns
-    a success message or an error response.
     
-    :param data: The `data` parameter in the `sendWhatsappMessage` function should contain the
-    message content and recipient information needed to send a WhatsApp message. This could include
-    details such as the recipient's phone number, the message text, and any other relevant
-    information required for sending the message via the WhatsApp API
-    :return: The function `sendWhatsappMessage` returns either a dictionary with the keys
-    "statusCode" and "res" in case of an error, or `True` if the message was successfully sent.
-    """
 
     def sendWhatsappMessage(data):
         try:

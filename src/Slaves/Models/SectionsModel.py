@@ -14,7 +14,7 @@ class SectionsModel:
         
         
    
-    def getSectionsByName(self, sectionName: tuple):
+    def getSectionsByName(self, sectionName: list):
         query = (
             """
             SELECT id, name FROM sections AS sc 
@@ -42,7 +42,7 @@ class SectionsModel:
             
             
     
-    def getAllSectionsConnected(self, initialSection: tuple):
+    def getAllSectionsConnected(self, initialSectionName: list):
         
         query = (
             """
@@ -58,17 +58,25 @@ class SectionsModel:
         
         try:
             # Execute the query
-            cursor.execute(query, initialSection)
+            cursor.execute(query, initialSectionName)
+            results = {
+                "id": [],
+                "name": []
+            }
             
             # Fetch all the rows
             rows = cursor.fetchall()
+            for row in rows:
+                results["id"].append(row[0])
+                results["name"].append(row[1])
+            
             # Close the cursor
             cursor.close()
-            return self.fetchingData(rows)
+            return results
         
         except Exception as e:
             # An error occurred while executing the query
-            print(f"Error filtering sections connected to '{initialSection}': {e}")
+            print(f"Error filtering sections connected to '{initialSectionName}': {e}")
             
             cursor.close()
             
