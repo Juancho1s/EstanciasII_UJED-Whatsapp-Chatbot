@@ -3,7 +3,7 @@ import requests as reqs
 from .. import ConversationFlow as CF
 import config
 from Slaves.Models import ProceduresModel, SectionsModel
-import Formats
+from Slaves.Chat.Services import Formats
 
 
 class Chatting:
@@ -87,7 +87,7 @@ class Chatting:
 
 
 
-class Messagestructure:
+class MessagesStructure:
     def __init__(self):
         self.sectionsModel = SectionsModel.SectionsModel()
         self.proceduresModel = ProceduresModel.ProceduresModel()
@@ -102,8 +102,15 @@ class Messagestructure:
         
         return self.sendingFormats.interactiveListMessage(phoneNumber, sectionsData, messageBody, messageFooter)
     
-    #Missing method: In order to get and specific section by name.
-    #def 
+    
+    def sectionDetailStructure(self, nameFilter, phoneNumber, messageBody, messageFooter):
+        sectionData = self.sectionsModel.getSectionsByName([nameFilter])
+        if sectionData == None:
+            return None
+        print(sectionData)
+        
+        return self.sendingFormats.interactiveListMessage(phoneNumber, sectionData, messageBody, messageFooter)
+
     
     
     def procedureListStrucutre(self, idFilter: int, phoneNumber: int, messageBody: str, messageFooter: str):
@@ -115,10 +122,10 @@ class Messagestructure:
         return self.sendingFormats.interactiveListMessage(phoneNumber, proceduresData, messageBody, messageFooter)
     
     
-    def procedureDetailsStructure(self, nameFilter: int, phoneNumber: int, messageBody: str, messageFooter: str):
+    def procedureDetailsStructure(self, nameFilter: int, phoneNumber: int, messageFooter: str):
         procedureData = self.proceduresModel.getDataByName([nameFilter])
         if procedureData == None:
             return None
         print(procedureData)
         
-        return self.sendingFormats.documentMessage(phoneNumber, procedureData["url"], messageBody, procedureData["name"], messageFooter)
+        return self.sendingFormats.documentMessage(phoneNumber, procedureData["url"][0], procedureData["content"][0], procedureData["name"][0], messageFooter)

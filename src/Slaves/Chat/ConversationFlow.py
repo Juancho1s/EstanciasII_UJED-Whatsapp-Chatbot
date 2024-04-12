@@ -1,5 +1,4 @@
 from Slaves.Chat.Services import Formats, Messages
-from Slaves.Models import ProceduresModel, SectionsModel
 import time
 
 
@@ -7,8 +6,7 @@ class ConversationFlow:
 
     def chatbotManagement(text, number, messageId, name):
         sendingFormats = Formats.SendingFormats()
-        proceduresModel = ProceduresModel.ProceduresModel()
-        sectionsModel = SectionsModel.SectionsModel()
+        messagesStructure = Messages.MessagesStructure()
 
 
         text = str(text).lower()
@@ -47,56 +45,29 @@ class ConversationFlow:
             return  collection
         
         elif "nocturna(general)" in text:
-            data = proceduresModel.getDataByName(["Nocturna(General)"])
-            print(data)
-            
-            document = sendingFormats.documentMessage(
-                number,
-                data["url"][0],
-                data["content"][0],
-                data["name"][0],
-                "Atte: control escolar"
-            )
+            document = messagesStructure.procedureDetailsStructure("Nocturna(general)", number, "Atte: control escolar")
             
             return Messages.Chatting.sendWhatsappMessage(document)
         
         elif "diurna(general)" in text:
-            data = proceduresModel.getDataByName(["Diurna(General)"])
-            print(data)
-            
-            document = sendingFormats.documentMessage(
-                number,
-                data["url"][0],
-                data["content"][0],
-                data["name"][0],
-                "Atte: control escolar"
-            )
+            document = messagesStructure.procedureDetailsStructure("Diurna(general)", number, "Atte: control escolar")
             
             return Messages.Chatting.sendWhatsappMessage(document)
 
         
         elif "media superior" in text:
-            proceduresData = proceduresModel.getDataByName(["Media superior"])
-            print(proceduresData)
-            
-            listMessage = sendingFormats.interactiveListMessage(number, proceduresData, "Puedes consultar las secciones referentes en la siguiente lista", "Atte: control escolar")
+            listMessage = messagesStructure.sectionListStrucutre("Media superior", number, "Puedes consultar las secciones referentes a educacion media superior en la siguiente lista", "Atte: control escolar")
             
             return Messages.Chatting.sendWhatsappMessage(listMessage)
 
         
         elif "por nivel educativo" in text:
-            sectionsData = sectionsModel.getAllSectionsConnected(["por nivel educativo"])
-            print(sectionsData)
-            
-            listMessage = sendingFormats.interactiveListMessage(number, sectionsData, "Puedes consultar las secciones referentes en la siguiente lista", "Atte: control escolar")
+            listMessage = messagesStructure.sectionListStrucutre("Por nivel educativo", number, "Puedes consultar las secciones referentes a nivel ecucativo en la siguiente lista", "Atte: control escolar")
 
             return Messages.Chatting.sendWhatsappMessage(listMessage)
         
         elif "oferta educativa" in text:
-            sectionsData = sectionsModel.getAllSectionsConnected(["Oferta educativa"])
-            print(sectionsData)
-            
-            listMessage = sendingFormats.interactiveListMessage(number, sectionsData, "Puedes consultar las secciones referentes en la siguiente lista", "Atte: control escolar")
+            listMessage = messagesStructure.sectionListStrucutre("Oferta educativa", number, "Puedes consultar las secciones referentes a oferta educativa en la siguiente lista", "Atte: control escolar")
             
             return Messages.Chatting.sendWhatsappMessage(listMessage)
 

@@ -83,17 +83,7 @@ class SectionsModel:
         return None
     
     
-    """
-    The function `fetchingData` retrieves and organizes data from rows into a dictionary format.
-    
-    :param rows: The `fetchingData` function takes two parameters: `self` and `rows`. The `rows`
-    parameter is expected to be a list of tuples where each tuple contains two elements - an ID and
-    a name. The function then processes this data and returns a dictionary `results` with keys "
-    :return: The `fetchingData` function returns a dictionary `results` containing keys "id" and
-    "name" with corresponding lists of values. If there are rows provided as input, the function
-    populates the lists with data from the rows and returns the results dictionary. If there are no
-    rows provided, it prints "No sections found." and returns `None`.
-    """
+
     def fetchingData(self, rows):
         results = {
                 "id": [], 
