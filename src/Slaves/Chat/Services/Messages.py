@@ -113,8 +113,9 @@ class MessagesStructure:
 
     
     
-    def procedureListStrucutre(self, idFilter: int, phoneNumber: int, messageBody: str, messageFooter: str):
-        proceduresData = self.proceduresModel.getConnectedProceduresBySection([idFilter])
+    def procedureListStrucutre(self, parentSectionName: str, phoneNumber: int, messageBody: str, messageFooter: str):
+        sectionId = self.sectionsModel.getSectionsByName([parentSectionName])["id"][0]
+        proceduresData = self.proceduresModel.getConnectedProceduresBySection([sectionId])
         if proceduresData == None:
             return None
         print(proceduresData)

@@ -39,8 +39,8 @@ class ProceduresModel:
             # For each row returned by the select statement
             if len(rows) > 0:
                 for row in rows:
-                    results["id"].append(row["id"])
-                    results["name"].append(row["name"])
+                    results["id"].append(row[0])
+                    results["name"].append(row[1])
                     
                 return results
             

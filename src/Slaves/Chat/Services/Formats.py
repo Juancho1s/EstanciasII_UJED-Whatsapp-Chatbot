@@ -27,11 +27,11 @@ class SendingFormats:
     
     def interactiveListMessage(self, number: int, options: dict, body: str, footer: str):
         rows = []
-        for i, values in enumerate(options.values):
+        for i in range(len(options["id"])):
             rows.append(
                 {
-                    "id": f"Seed{values["id"]}_row_{i + 1}",
-                    "title": values["name"],
+                    "id": f"Seed{options["id"][i]}_row_{i + 1}",
+                    "title": options["name"][i],
                 }
             )
             

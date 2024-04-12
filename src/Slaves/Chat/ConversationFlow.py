@@ -44,22 +44,43 @@ class ConversationFlow:
             collection.append(Messages.Chatting.sendWhatsappMessage(document))
             return  collection
         
+        #Detailed procedures options:
+                
         elif "nocturna(general)" in text:
-            document = messagesStructure.procedureDetailsStructure("Nocturna(general)", number, "Atte: control escolar")
+            document = messagesStructure.procedureDetailsStructure("Nocturna(General)", number, "Atte: control escolar")
             
             return Messages.Chatting.sendWhatsappMessage(document)
         
         elif "diurna(general)" in text:
-            document = messagesStructure.procedureDetailsStructure("Diurna(general)", number, "Atte: control escolar")
+            document = messagesStructure.procedureDetailsStructure("Diurna(General)", number, "Atte: control escolar")
             
             return Messages.Chatting.sendWhatsappMessage(document)
-
         
+        elif "nocturna(semiesc)" in text:
+            document = messagesStructure.procedureDetailsStructure("Nocturna(Semiesc)", number, "Atte: control escolar")
+            
+            return Messages.Chatting.sendWhatsappMessage(document)
+        
+        elif "diurna(música)" in text:
+            document = messagesStructure.procedureDetailsStructure("Diurna(Música)", number, "Atte: control escolar")
+            
+            return Messages.Chatting.sendWhatsappMessage(document)
+        
+        elif "ciencias/tecnologías" in text:
+            document = messagesStructure.procedureDetailsStructure("Ciencias/Tecnologías", number, "Atte: control escolar")
+            
+            return Messages.Chatting.sendWhatsappMessage(document)
+        
+        elif "ciencias/cumanidades" in text:
+            document = messagesStructure.procedureDetailsStructure("Ciencias/Humanidades", number, "Atte: control escolar")
+            
+            return Messages.Chatting.sendWhatsappMessage(document)
+        
+        #Sections lists
         elif "media superior" in text:
-            listMessage = messagesStructure.sectionListStrucutre("Media superior", number, "Puedes consultar las secciones referentes a educacion media superior en la siguiente lista", "Atte: control escolar")
+            listMessage = messagesStructure.procedureListStrucutre("Media superior", number, "Puedes consultar las secciones referentes a educacion media superior en la siguiente lista", "Atte: control escolar")
             
             return Messages.Chatting.sendWhatsappMessage(listMessage)
-
         
         elif "por nivel educativo" in text:
             listMessage = messagesStructure.sectionListStrucutre("Por nivel educativo", number, "Puedes consultar las secciones referentes a nivel ecucativo en la siguiente lista", "Atte: control escolar")
@@ -76,9 +97,9 @@ class ConversationFlow:
 
             body = "Lo siento mucho pero no pude enteneder el mensaje. ¿Quieres ayuda con alguno de los siguientes conceptos?"
             footer = "Atte: control escolar"
-            options = ["Inscripciones", "Pagos", "Documento de reglas"]
+            options = ["oferta educativa", "documento de reglas"]
 
             replyButtonData = sendingFormats.interactiveButtonMessage(
-                number, options, body, footer, "sed1"
+                number, options, body, footer, "btn_sed1"
             )
             return Messages.Chatting.sendWhatsappMessage(replyButtonData)

@@ -18,7 +18,7 @@ class SectionsModel:
         query = (
             """
             SELECT id, name FROM sections AS sc 
-            WHERE sc.name == (%s);
+            WHERE sc.name = (%s);
             """
         )
         
@@ -26,12 +26,20 @@ class SectionsModel:
         try:
             #  Execute the query
             cursor.execute(query, sectionName)
+            results = {
+                "id": [],
+                "name": []
+            }
             
             # Fetch all the rows
             rows = cursor.fetchall()
+            for row in rows:
+                results["id"].append(row[0])
+                results["name"].append(row[1])
+
             # Close the cursor
             cursor.close()
-            return self.fetchingData(rows)
+            return results
         
         except Exception as e:
             # An error occurred while executing the query
